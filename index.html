@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HackerRank Profile Analyzer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #4caf50;
+    }
+    .input-section {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      background-color: #4caf50;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    table th, table td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+    table th {
+      background-color: #4caf50;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>HackerRank Profile Analyzer</h1>
+    <div class="input-section">
+      <label for="usernames">Enter HackerRank Usernames (comma-separated):</label>
+      <input type="text" id="usernames" placeholder="e.g., user1, user2, user3">
+    </div>
+    <button id="fetchProfiles">Fetch Profiles</button>
+
+    <table id="resultsTable" style="display: none;">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Overall Rank</th>
+          <th>Problems Solved</th>
+          <th>Badges</th>
+          <th>Leaderboard Rank</th>
+          <th>Last Submission Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Rows will be populated here -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    document.getElementById('fetchProfiles').addEventListener('click', () => {
+      const usernames = document.getElementById('usernames').value.split(',').map(u => u.trim());
+      if (!usernames.length) {
+        alert('Please enter at least one username.');
+        return;
+      }
+
+      const resultsTable = document.getElementById('resultsTable');
+      const tableBody = resultsTable.querySelector('tbody');
+      tableBody.innerHTML = '';
+
+      usernames.forEach(username => {
+        // Mock data for demonstration (replace with actual API calls)
+        const mockData = {
+          username,
+          overallRank: Math.floor(Math.random() * 1000),
+          problemsSolved: Math.floor(Math.random() * 500),
+          badges: 'Gold, Silver',
+          leaderboardRank: 'Algorithms: ' + Math.floor(Math.random() * 100),
+          lastSubmission: new Date().toISOString().split('T')[0],
+        };
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${mockData.username}</td>
+          <td>${mockData.overallRank}</td>
+          <td>${mockData.problemsSolved}</td>
+          <td>${mockData.badges}</td>
+          <td>${mockData.leaderboardRank}</td>
+          <td>${mockData.lastSubmission}</td>
+        `;
+        tableBody.appendChild(row);
+      });
+
+      resultsTable.style.display = 'table';
+    });
+  </script>
+</body>
+</html>
